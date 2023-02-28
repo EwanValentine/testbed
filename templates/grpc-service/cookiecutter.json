@@ -1,0 +1,5 @@
+{
+  "service_name": "user-service",
+  "model_name": "user",
+  "service_description": "Manages users"
+}

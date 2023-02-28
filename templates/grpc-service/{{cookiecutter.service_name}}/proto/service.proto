@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+package model;
+
+option go_package = "github.com/EwanValentine/testbed/services/{{cookiecutter.service_name}}/gen/go/proto";
+
+import "google/api/annotations.proto";
+
+service {{cookiecutter.service_name.capitalize()}}Service {
+  rpc Example(ExampleRequest) returns (ExampleResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/greet"
+      body: "*"
+    };
+  }
+}
+
+message ExampleRequest {
+  string name = 1;
+}
+
+message ExampleResponse {
+  string greeting = 2;
+}
+
