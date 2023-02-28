@@ -9,19 +9,54 @@ option go_package = "github.com/EwanValentine/testbed/services/calculator/gen/go
 import "google/api/annotations.proto";
 
 service CalculatorService {
-  rpc Example(ExampleRequest) returns (ExampleResponse) {
+  rpc Add(AddRequest) returns (AddResponse) {
     option (google.api.http) = {
-      post: "/api/v1/greet"
+      post: "/api/v1/calculator/add"
+      body: "*"
+    };
+  }
+
+  rpc Subtract(SubtractRequest) returns (SubtractResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/calculator/subtract"
+      body: "*"
+    };
+  }
+
+  rpc Multiply(MultiplyRequest) returns (MultiplyResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/calculator/multiply"
       body: "*"
     };
   }
 }
 
-message ExampleRequest {
-  string name = 1;
+message Tuple {
+  int32 a = 1;
+  int32 b = 2;
 }
 
-message ExampleResponse {
-  string greeting = 2;
+message AddRequest {
+  Tuple values = 1;
+}
+
+message AddResponse {
+  int32 result = 1;
+}
+
+message SubtractRequest {
+  Tuple values = 1;
+}
+
+message SubtractResponse {
+  int32 result = 1;
+}
+
+message MultiplyRequest {
+  Tuple values = 1;
+}
+
+message MultiplyResponse {
+  int32 result = 1;
 }
 

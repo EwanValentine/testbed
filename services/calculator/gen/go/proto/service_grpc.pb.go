@@ -22,7 +22,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CalculatorServiceClient interface {
-	Example(ctx context.Context, in *ExampleRequest, opts ...grpc.CallOption) (*ExampleResponse, error)
+	Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*AddResponse, error)
+	Subtract(ctx context.Context, in *SubtractRequest, opts ...grpc.CallOption) (*SubtractResponse, error)
+	Multiply(ctx context.Context, in *MultiplyRequest, opts ...grpc.CallOption) (*MultiplyResponse, error)
 }
 
 type calculatorServiceClient struct {
@@ -33,9 +35,27 @@ func NewCalculatorServiceClient(cc grpc.ClientConnInterface) CalculatorServiceCl
 	return &calculatorServiceClient{cc}
 }
 
-func (c *calculatorServiceClient) Example(ctx context.Context, in *ExampleRequest, opts ...grpc.CallOption) (*ExampleResponse, error) {
-	out := new(ExampleResponse)
-	err := c.cc.Invoke(ctx, "/model.CalculatorService/Example", in, out, opts...)
+func (c *calculatorServiceClient) Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*AddResponse, error) {
+	out := new(AddResponse)
+	err := c.cc.Invoke(ctx, "/model.CalculatorService/Add", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *calculatorServiceClient) Subtract(ctx context.Context, in *SubtractRequest, opts ...grpc.CallOption) (*SubtractResponse, error) {
+	out := new(SubtractResponse)
+	err := c.cc.Invoke(ctx, "/model.CalculatorService/Subtract", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *calculatorServiceClient) Multiply(ctx context.Context, in *MultiplyRequest, opts ...grpc.CallOption) (*MultiplyResponse, error) {
+	out := new(MultiplyResponse)
+	err := c.cc.Invoke(ctx, "/model.CalculatorService/Multiply", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +66,9 @@ func (c *calculatorServiceClient) Example(ctx context.Context, in *ExampleReques
 // All implementations must embed UnimplementedCalculatorServiceServer
 // for forward compatibility
 type CalculatorServiceServer interface {
-	Example(context.Context, *ExampleRequest) (*ExampleResponse, error)
+	Add(context.Context, *AddRequest) (*AddResponse, error)
+	Subtract(context.Context, *SubtractRequest) (*SubtractResponse, error)
+	Multiply(context.Context, *MultiplyRequest) (*MultiplyResponse, error)
 	mustEmbedUnimplementedCalculatorServiceServer()
 }
 
@@ -54,8 +76,14 @@ type CalculatorServiceServer interface {
 type UnimplementedCalculatorServiceServer struct {
 }
 
-func (UnimplementedCalculatorServiceServer) Example(context.Context, *ExampleRequest) (*ExampleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Example not implemented")
+func (UnimplementedCalculatorServiceServer) Add(context.Context, *AddRequest) (*AddResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Add not implemented")
+}
+func (UnimplementedCalculatorServiceServer) Subtract(context.Context, *SubtractRequest) (*SubtractResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Subtract not implemented")
+}
+func (UnimplementedCalculatorServiceServer) Multiply(context.Context, *MultiplyRequest) (*MultiplyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Multiply not implemented")
 }
 func (UnimplementedCalculatorServiceServer) mustEmbedUnimplementedCalculatorServiceServer() {}
 
@@ -70,20 +98,56 @@ func RegisterCalculatorServiceServer(s grpc.ServiceRegistrar, srv CalculatorServ
 	s.RegisterService(&CalculatorService_ServiceDesc, srv)
 }
 
-func _CalculatorService_Example_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExampleRequest)
+func _CalculatorService_Add_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CalculatorServiceServer).Example(ctx, in)
+		return srv.(CalculatorServiceServer).Add(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/model.CalculatorService/Example",
+		FullMethod: "/model.CalculatorService/Add",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CalculatorServiceServer).Example(ctx, req.(*ExampleRequest))
+		return srv.(CalculatorServiceServer).Add(ctx, req.(*AddRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CalculatorService_Subtract_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubtractRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CalculatorServiceServer).Subtract(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/model.CalculatorService/Subtract",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CalculatorServiceServer).Subtract(ctx, req.(*SubtractRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CalculatorService_Multiply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MultiplyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CalculatorServiceServer).Multiply(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/model.CalculatorService/Multiply",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CalculatorServiceServer).Multiply(ctx, req.(*MultiplyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,8 +160,16 @@ var CalculatorService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*CalculatorServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Example",
-			Handler:    _CalculatorService_Example_Handler,
+			MethodName: "Add",
+			Handler:    _CalculatorService_Add_Handler,
+		},
+		{
+			MethodName: "Subtract",
+			Handler:    _CalculatorService_Subtract_Handler,
+		},
+		{
+			MethodName: "Multiply",
+			Handler:    _CalculatorService_Multiply_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -9,6 +9,7 @@ import (
 
 	pb "github.com/EwanValentine/testbed/services/calculator/gen/go/proto"
 	"github.com/EwanValentine/testbed/services/calculator/internal/config"
+	grpcService "github.com/EwanValentine/testbed/services/calculator/transports/grpc"
 )
 
 func main() {
@@ -22,6 +23,6 @@ func main() {
 
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	pb.RegisterCalculatorServiceServer(grpcServer, grpc.New(conf, logger))
+	pb.RegisterCalculatorServiceServer(grpcServer, grpcService.New(logger, conf))
 	log.Fatal(grpcServer.Serve(lis))
 }
