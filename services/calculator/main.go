@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 
+	"go.uber.org/zap"
 	"google.golang.org/grpc"
 
 	pb "github.com/EwanValentine/testbed/services/calculator/gen/go/proto"

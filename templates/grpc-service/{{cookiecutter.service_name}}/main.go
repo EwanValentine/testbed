@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 
+	"go.uber.org/zap"
 	"google.golang.org/grpc"
 
 	"github.com/EwanValentine/testbed/services/{{cookiecutter.service_name}}/internal/config"
