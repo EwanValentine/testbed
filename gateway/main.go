@@ -2,11 +2,13 @@ package gateway
 
 import (
 	"context"
-	greeter "github.com/EwanValentine/testbed/services/greeter/gen/go/proto"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"google.golang.org/grpc"
 	"log"
 	"net/http"
+
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"google.golang.org/grpc"
+
+	greeter "github.com/EwanValentine/testbed/services/greeter/gen/go/proto"
 )
 
 func main() {

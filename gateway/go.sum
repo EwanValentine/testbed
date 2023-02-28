@@ -1,3 +1,5 @@
+github.com/EwanValentine/testbed/services/greeter v0.0.0-20230228113426-54d8ee22762a h1:T4M/Dq44MFfTOXGuuiwux5IY6w9i/Ui3QhUdXYI3wjc=
+github.com/EwanValentine/testbed/services/greeter v0.0.0-20230228113426-54d8ee22762a/go.mod h1:NxOJcP2h/2iq3B1v7Xdhhv4+OoIDPjOw27T1pb632Hg=
 github.com/golang/glog v1.0.0 h1:nfP3RFugxnNRyKgeWd4oI1nYvXpxrx8ck8ZrcizshdQ=
 github.com/golang/protobuf v1.5.0/go.mod h1:FsONVRAS9T7sI+LIUmWTfcYkHO4aIWwzhcaSAoJOfIk=
 github.com/golang/protobuf v1.5.2 h1:ROPKBNFfQgOUMifHyP+KYbvpjbdoFNs+aK7DXlji0Tw=
