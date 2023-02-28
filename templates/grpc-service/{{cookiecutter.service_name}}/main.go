@@ -15,12 +15,13 @@ func main() {
 	logger, _ := zap.NewProduction()
 	conf := config.Load()
 
-	if err := net.Listen("tcp", conf.Addr); err != nil {
+	lis, err := net.Listen("tcp", conf.Addr)
+	if err != nil {
 		log.Panic(err)
 	}
 
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	pb.Register{{cookiecutter.service_name.capitalize() }}ServiceServer(grpcServer, &service{})
+	pb.Register{{cookiecutter.service_name.capitalize() }}ServiceServer(grpcServer, grpc.New(logger, conf))
 	log.Fatal(grpcServer.Serve(lis))
 }

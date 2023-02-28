@@ -22,6 +22,6 @@ func main() {
 
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	pb.RegisterCalculatorServiceServer(grpcServer, &service{})
+	pb.RegisterCalculatorServiceServer(grpcServer, grpc.New(conf, logger))
 	log.Fatal(grpcServer.Serve(lis))
 }
