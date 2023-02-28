@@ -12,6 +12,7 @@ type Config struct {
 
 func Load() {
 	var c Config
+	ctx := context.Background()
 	if err := envconfig.Process(ctx, &c); err != nil {
 		log.Fatal(err)
 	}
