@@ -28,7 +28,7 @@ func main() {
 
 	// I know it's deprecated, but can't be arsed figuring out what it is now
 	opts = append(opts, grpc.WithInsecure())
-	if err := greeter.RegisterGreeterServiceHandlerFromEndpoint(ctx, mux, "localhost:9000", opts); err != nil {
+	if err := greeter.RegisterGreeterServiceHandlerFromEndpoint(ctx, mux, "greeter:9000", opts); err != nil {
 		log.Panic(err)
 	}
 
