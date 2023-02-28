@@ -1,4 +1,4 @@
-module testbed/services/greeter
+module github.com/EwanValentine/testbed/services/greeter
 
 go 1.19
 

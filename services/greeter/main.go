@@ -7,7 +7,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	pb "testbed/services/greeter/gen/go/proto"
+	pb "github.com/EwanValentine/testbed/services/greeter/gen/go/proto"
 )
 
 type service struct {

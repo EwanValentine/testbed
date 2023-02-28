@@ -1,10 +1,6 @@
-module testbed/gateway
-
-replace testbed/services/greeter => ../services/greeter
+module github.com/EwanValentine/testbed/gateway
 
 go 1.19
-
-require testbed/services/greeter v0.0.0-00010101000000-000000000000
 
 require (
 	github.com/golang/protobuf v1.5.2 // indirect
